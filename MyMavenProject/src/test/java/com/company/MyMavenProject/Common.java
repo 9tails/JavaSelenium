@@ -21,7 +21,7 @@ public class Common extends TestCase implements Command {
 	static File pathToBinary = new File("C:/Program Files (x86)/Mozilla Firefox/firefox.exe");
 	static FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
 	static FirefoxProfile firefoxProfile = new FirefoxProfile();
-	static WebDriver driver = new FirefoxDriver(ffBinary,firefoxProfile);  
+	private static WebDriver driver = new FirefoxDriver(ffBinary,firefoxProfile);  
 
 	public static void TakesScreenshot(WebDriver driver, String FailedAt){
 		try{
@@ -42,21 +42,21 @@ public class Common extends TestCase implements Command {
     {
         public void execute(Object data) 
         {
-        	driver.get("http://www.google.com/webhp?complete=1&hl=en");
+        	getDriver().get("http://www.google.com/webhp?complete=1&hl=en");
 			// Find the text input element by its name
 	  
-			WebElement element = driver.findElement(By.name("q"));
+			WebElement element = getDriver().findElement(By.name("q"));
 			
 			// Enter something to search for
 			element.sendKeys("Henry Chan");
-	        TakesScreenshot(driver,"test_hellotest");
+	        TakesScreenshot(getDriver(),"test_hellotest");
 			// Now submit the form. WebDriver will find the form for us from the element
 			element.submit();
 			// Check the title of the page
-			driver.findElement(By.tagName("body")).getText().contains("ABCD");
-			driver.getCurrentUrl();
-			driver.getPageSource();
-			System.out.println("Page title is: " + driver.getTitle());
+			getDriver().findElement(By.tagName("body")).getText().contains("ABCD");
+			getDriver().getCurrentUrl();
+			getDriver().getPageSource();
+			System.out.println("Page title is: " + getDriver().getTitle());
         }    
     }
 
@@ -68,19 +68,36 @@ public class Common extends TestCase implements Command {
       	  command.execute(data);
       } catch (Exception e) {
 
-          TakesScreenshot(driver,"ABCD");
+          TakesScreenshot(getDriver(),"ABCD");
       	e.printStackTrace();
       }
       
-		driver.close();
+		getDriver().close();
 		
 	
     }
 
+    
+    
+    
 	@Override
 	public void execute(Object data) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+
+
+	public static WebDriver getDriver() {
+		return driver;
+	}
+
+
+
+
+	public static void setDriver(WebDriver driver) {
+		Common.driver = driver;
 	}
 
 //    public static void main(String... args) throws Exception 

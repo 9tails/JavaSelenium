@@ -6,6 +6,10 @@ import junit.framework.TestCase;
 //import java.net.Socket;
 //import java.net.UnknownHostException;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestRule;
@@ -15,65 +19,45 @@ import static org.junit.Assert.*;
 
 public class MyUnitTest {
 
-
-//	    public MyUnitTest watchman= new MyUnitTest() {
-//	     
-//	        protected void failed(Description d) {
-//	            // take screenshot here
-//	        }
-//	    };
-//
-//	    @Test
-//	    public void fails() {
-//	        fail();
-//	    }
-//
-//	    protected void failed(Description d) {
-//			// TODO Auto-generated method stub
-//			
-//		}
-//
-//		@Test
-//	    public void succeeds() {
-//	    }
-
-   // @SuppressWarnings("unused")
-//	private Socket clientSocket;
-
-//	@Test
-//    public void testRead() throws IOException, IOException {
-//        MyUnit myUnit = new MyUnit();
-//        myUnit.readLocale();
-//    }
-	
-//	@Test
-//    public void testWrite() throws IOException, IOException {
-//        MyUnit myUnit2 = new MyUnit();
-//        myUnit2.writetoLocale();
-//	}	
-	
-	
-//	@Test
-//    public void testStartSeleniumServer() throws Exception {
-//		 MyUnit myUnit3 = new MyUnit();
-//		 myUnit3.testStartSeleniumServer();
+//	@Before
+//	public void setUp() throws Exception {
+//		System.out.println("start");
+//		getDriver().get("http://www.google.com");
 //	}
 	
-	@Test
-    public void testTestMethod() throws Exception {
-		 MyUnit myUnit4 = new MyUnit();
-		 myUnit4.TestMethod();
+    @BeforeClass
+	public static void setUpClass() throws Exception {
+		System.out.println("start");
+		MyUnit.getDriver().get("http://www.google.com");
 	}
 	
-//	@Test
-//    public void testConcatenate() throws IOException, IOException {
-//		
-//		ServerSocket serverSocket = new ServerSocket(4444);
-//		clientSocket = new Socket("localhost", 4444);
-//		assertEquals("onetwo", result);
-//
-//	
-//	}
-		
+	@Test
+    public void testSearchName() throws Exception {
+		MyUnit.testFindFieldsbyName();
+	}
 	
+	@Test
+    public void testSearchxPath() throws Exception {
+		MyUnit.testFindFieldsbyXpath();
+	}
+	@Test
+    public void testSearchCSS() throws Exception {
+		MyUnit.testFindFieldsbyCSS();
+	}
+	
+//	@After
+//	public void tearDown() throws Exception {
+//		System.out.println("End");
+//		MyUnit.getDriver().quit();
+//	}	
+
+	
+	@AfterClass
+	public static void tearDownClass() throws Exception {
+		System.out.println("End");
+		MyUnit.getDriver().quit();
+	}
+    
+    
+
 }
